@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Image Classification</title>
+</head>
+<body>
+    <section id="form" class="sectioncentered">
+                
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/img1.jpg') }}" alt="Image">
+            
+            <p class="guidelines">Follow these guidelines for accurate predictions:</p>
+            <ul class="guidelines-list">
+                <li>Upload your image.</li>
+                <li>Click on Predict button.</li>
+                <li>The Model is around 50% accurate so predictions can be wrong.</li>
+            </ul>
+        </div>
+    <div class="right-section">
+        <h2>Image Classification</h2>
+        <br>
+
+    {% if img_data %}
+        <img src="data:image/jpeg;base64,{{ img_data }}" alt="Uploaded Image" style="align-items: center;">
+    {% endif %}
+
+    <form id="input-form" action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if result %}
+        <p>Prediction: {{ result }}</p>
+    {% endif %}
+
+    </div>
+    </section>
+   
+   
+</body>
+</html>
